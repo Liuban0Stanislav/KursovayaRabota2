@@ -19,14 +19,6 @@ public class JavaQuestionService implements QuestionService {
             new Question("вопрос 6", "ответ 6")
     ));
 
-//    public static void main(String[] args) {
-//        Question question7 = new Question("вопрос 7", "ответ 7");
-//        questions.add(question7);
-//        JavaQuestionService js = new JavaQuestionService();
-//        System.out.println(js.getAll());
-//        js.remove(question7);
-//        System.out.println(js.getAll());
-//    }
 
     @Override
     public void add(String question, String answer) {

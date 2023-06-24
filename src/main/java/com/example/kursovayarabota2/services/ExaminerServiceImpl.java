@@ -14,7 +14,7 @@ public class ExaminerServiceImpl implements ExaminerService {
      * Коллекция questionList предназначена для хранения уникальных вопросов
      */
     private List<String> questionsList = new ArrayList<>();
-    private final QuestionService questionService;
+    private QuestionService questionService;
 
     public ExaminerServiceImpl(QuestionService questionService) {
         this.questionService = questionService;
@@ -23,6 +23,7 @@ public class ExaminerServiceImpl implements ExaminerService {
     /**
      * Метод возвращает коллекцию из оригинальных вопросов типа String. Количество вопросов
      * задается как параметр метода.
+     *
      * @Цикл длится пока счетчик оригинальных вопросов не будет равен заданному
      * количеству. В теле цикла мы получаем из коллекции случайный вопрос,
      * а затем проверяем его на уникальность (нет ли в листе questionList такого
@@ -30,12 +31,12 @@ public class ExaminerServiceImpl implements ExaminerService {
      */
     @Override
     public List<String> getQuestions(int amount) {
-//        int amount = Integer.parseInt(amountParam);
+        questionsList.clear();
         validateQuantityQuestions(amount);
-        int originalQuestionsCounter = 0;
+        int originalQuestionsCounter = 1;
         while (originalQuestionsCounter <= amount) {
             String question = questionService.getRandomQuestion().getQuestion();
-            if (isQuestionUnique(question)) {
+            if (questionService.equals(question)) {
                 questionsList.add(questionService.getRandomQuestion().getQuestion());
                 originalQuestionsCounter++;
             }
@@ -46,24 +47,27 @@ public class ExaminerServiceImpl implements ExaminerService {
     /**
      * Метод возвращает true, если вопрос уникален или false, если такой вопрос
      * уже присутствует в questionList.
+     *
      * @Цикл пробегает по коллекции "вопрос-ответ" и сравнивает вопрос параметр
      * с вопросом полученным из коллекции, если вопросы совпадают, то возвращается
      * false, если совпадений не найдено, то возвращается true
      */
     private boolean isQuestionUnique(String question) {
         for (String element : questionsList) {
-            if (question.equals(element)) {
+            if (element.equals(question)) {
                 return false;
             }
         }
         return true;
     }
 
-    /**Метод проверяет не выходит ли введенный параметр amount за пределы размера
+    /**
+     * Метод проверяет не выходит ли введенный параметр amount за пределы размера
      * коллекции Set (вопрос-ответ), находящейся в questionService. И если выходит,
-     * то выбрасывается исключение*/
-    private void validateQuantityQuestions(int amount){
-        if(amount > questionService.getAll().size()){
+     * то выбрасывается исключение
+     */
+    private void validateQuantityQuestions(int amount) {
+        if (amount > questionService.getAll().size()) {
             throw new AmountOutOfCollectionBoundException();
         }
     }

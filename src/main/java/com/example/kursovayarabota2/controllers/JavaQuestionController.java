@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/exam/java")
 public class JavaQuestionController {
-    QuestionService questionService;
+    private QuestionService questionService;
     public JavaQuestionController(QuestionService questionService) {
         this.questionService = questionService;
     }
