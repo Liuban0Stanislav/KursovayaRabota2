@@ -14,15 +14,6 @@ public class KursovayaRabota2Application {
     public static void main(String[] args) {
         SpringApplication.run(KursovayaRabota2Application.class, args);
 
-//        ExaminerService es = new ExaminerServiceImpl(new JavaQuestionService());
-//        System.out.println(es.getQuestions(6));
-//        System.out.println(es.getQuestions(6));
-//        System.out.println(es.getQuestions(6));
-//        System.out.println(es.getQuestions(6));
-//        System.out.println(es.getQuestions(6));
-//        System.out.println(es.getQuestions(6));
-//        System.out.println(es.getQuestions(6));
-
     }
 
 }

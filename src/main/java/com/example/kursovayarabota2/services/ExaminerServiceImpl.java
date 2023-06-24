@@ -37,7 +37,7 @@ public class ExaminerServiceImpl implements ExaminerService {
         while (originalQuestionsCounter <= amount) {
             String question = questionService.getRandomQuestion().getQuestion();
             if (isQuestionUnique(question)) {
-                questionsList.add(questionService.getRandomQuestion().getQuestion());
+                questionsList.add(question);
                 originalQuestionsCounter++;
             }
         }
