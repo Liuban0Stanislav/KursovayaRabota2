@@ -2,6 +2,7 @@ package com.example.kursovayarabota2.services;
 
 import com.example.kursovayarabota2.exceptions.NullCollectionException;
 import com.example.kursovayarabota2.Question;
+import com.example.kursovayarabota2.exceptions.ParameterIsNullException;
 import com.example.kursovayarabota2.interfaces.QuestionService;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,8 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public void add(String question, String answer) {
+        validateParameter(question);
+        validateParameter(answer);
         questions.add(new Question(question, answer));
         System.out.println("объект Question добавлен\n" +
                 question + "\n" +
@@ -30,16 +33,20 @@ public class JavaQuestionService implements QuestionService {
 
     @Override
     public void remove(String question, String answer) {
-        validateCollectionIsNotNull();
-        questions.remove(question);
-        System.out.println("объект Question добавлен\n" +
+        validateParameter(question);
+        validateParameter(answer);
+        Question questionNeedRemove = new Question(question, answer);
+        questions.remove(questionNeedRemove);
+        System.out.println("объект Question удален\n" +
                 question + "\n" +
                 answer + "\n");
     }
 
     @Override
     public Set<Question> getAll() {
-        validateCollectionIsNotNull();
+        for(Question question: questions){
+            System.out.println(question);
+        }
         return questions;
     }
 
@@ -61,7 +68,13 @@ public class JavaQuestionService implements QuestionService {
 
     private void validateCollectionIsNotNull() {
         if (questions.isEmpty()) {
-            throw new NullCollectionException();
+            throw new NullCollectionException("коллекция пуста");
+        }
+    }
+
+    private void validateParameter(String parameter){
+        if(parameter.equals(null)){
+            throw new ParameterIsNullException("пользователь забыл ввести вопрос либо ответ");
         }
     }
 }

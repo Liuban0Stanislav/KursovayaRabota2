@@ -30,7 +30,7 @@ public class JavaQuestionController {
     @GetMapping("/remove")
     public String remove(@RequestParam("question")String question, @RequestParam("answer")String answer){
         questionService.remove(question, answer);
-        return "объект Question добавлен\n" +
+        return "объект Question удален\n" +
                 question + "\n" +
                 answer + "\n";
     }
