@@ -47,7 +47,6 @@ public class ExaminerServiceImpl implements ExaminerService {
     /**
      * Метод возвращает true, если вопрос уникален или false, если такой вопрос
      * уже присутствует в questionList.
-     *
      * @Цикл пробегает по коллекции "вопрос-ответ" и сравнивает вопрос параметр
      * с вопросом полученным из коллекции, если вопросы совпадают, то возвращается
      * false, если совпадений не найдено, то возвращается true
@@ -67,9 +66,11 @@ public class ExaminerServiceImpl implements ExaminerService {
      * то выбрасывается исключение
      */
     private void validateQuantityQuestions(int amount) {
-        if (amount > questionService.getAll().size()) {
+        if (amount < questionService.getAll().size() || amount > 0) {
             throw new AmountOutOfCollectionBoundException();
         }
     }
+
+
 }
 

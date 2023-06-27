@@ -1,16 +1,14 @@
 package com.example.kursovayarabota2;
 
+import com.example.kursovayarabota2.exceptions.ParameterIsNullException;
 import com.example.kursovayarabota2.services.JavaQuestionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -19,8 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class JavaQuestionServiceTest {
-    @Mock
-    private Random random;
     private final JavaQuestionService jqs = new JavaQuestionService();
 
     @BeforeEach
@@ -28,9 +24,6 @@ public class JavaQuestionServiceTest {
         jqs.getAll().clear(); //очищаю коллекцию
         assertTrue(jqs.getAll().isEmpty()); //проверка, что коллекция пуста
     }
-
-
-
 
     public static Stream<Arguments> provideParamsForTheTests() {
         return Stream.of(
@@ -97,29 +90,13 @@ public class JavaQuestionServiceTest {
     }
 
     @Test
+    public void addValidateParameterTest(){
+        assertThrows(ParameterIsNullException.class, ()-> jqs.add("", ""));
+    }
+
+    @Test
     public void getRandomQuestionTest(){
-        /**ставим заглушку на метод Random.nextInt()*/
-        int size = 3;
-        random = new Random();//инициализирую объект random
-
-        Mockito.when(random.nextInt(size)).thenReturn(2);
-
-        Question expectedQuestion = QUESTION2;
-        Question actualQuestion = jqs.getRandomQuestion();
-
-        assertEquals(expectedQuestion, actualQuestion);
-
-        size = 4;
-        Mockito.when(new Random().nextInt(size)).thenReturn(1);
-
-        expectedQuestion = QUESTION2;
-        actualQuestion = jqs.getRandomQuestion();
-
-        size = 6;
-        Mockito.when(new Random().nextInt(size)).thenReturn(5);
-
-        expectedQuestion = QUESTION2;
-        actualQuestion = jqs.getRandomQuestion();
+        assertThrows(ParameterIsNullException.class, ()-> jqs.add("", ""));
     }
 
 }

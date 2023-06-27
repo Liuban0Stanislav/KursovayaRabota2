@@ -73,7 +73,7 @@ public class JavaQuestionService implements QuestionService {
     }
 
     private void validateParameter(String parameter){
-        if(parameter.equals(null)){
+        if(parameter.equals("")){
             throw new ParameterIsNullException("пользователь забыл ввести вопрос либо ответ");
         }
     }
