@@ -1,7 +1,9 @@
 package com.example.kursovayarabota2.controllers;
 
 import com.example.kursovayarabota2.interfaces.ExaminerService;
+import com.example.kursovayarabota2.interfaces.QuestionRepository;
 import com.example.kursovayarabota2.interfaces.QuestionService;
+import com.example.kursovayarabota2.repositories.JavaQuestionRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,26 +12,24 @@ import org.springframework.web.bind.annotation.*;
 public class JavaQuestionController {
     private QuestionService questionService;
     private ExaminerService examinerService;
+    private QuestionRepository questionRepository;
 
-    public JavaQuestionController(@Qualifier("JavaQuestionService") QuestionService questionService,
-                                  ExaminerService examinerService) {
+    public JavaQuestionController(@Qualifier("javaQuestionService") QuestionService questionService,
+                                  ExaminerService examinerService,
+                                  @Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
         this.questionService = questionService;
         this.examinerService = examinerService;
-    }
-
-    @GetMapping("/lol")
-    public String lol(){
-        return "Lol";
+        this.questionRepository = questionRepository;
     }
 
     @GetMapping("/")
     public String getAll() {
-        return questionService.getAll().toString();
+        return questionRepository.getAll().toString();
     }
 
     @GetMapping("/add")
     public String add(@RequestParam("question") String question, @RequestParam("answer") String answer) {
-        questionService.add(question, answer);
+        questionRepository.add(question, answer);
         return "объект Question добавлен\n" +
                 question + "\n" +
                 answer + "\n";
@@ -37,7 +37,7 @@ public class JavaQuestionController {
 
     @GetMapping("/remove")
     public String remove(@RequestParam("question") String question, @RequestParam("answer") String answer) {
-        questionService.remove(question, answer);
+        questionRepository.remove(question, answer);
         return "объект Question удален\n" +
                 question + "\n" +
                 answer + "\n";

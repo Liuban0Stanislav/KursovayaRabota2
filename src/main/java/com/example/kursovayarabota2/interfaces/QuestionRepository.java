@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Set;
 @Repository
 public interface QuestionRepository {
-
     void add(String question, String answer);
 
     void remove(String question, String answer);

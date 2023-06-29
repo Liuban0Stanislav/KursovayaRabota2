@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 public interface QuestionService {
-    void add(String question, String answer);
-
-    void remove(String question, String answer);
-
-    Set<Question> getAll();
+//    void add(String question, String answer);
+//
+//    void remove(String question, String answer);
+//
+//    Set<Question> getAll();
     Question getRandomQuestion();
 }

@@ -1,7 +1,7 @@
 package com.example.kursovayarabota2;
 
 import com.example.kursovayarabota2.exceptions.AmountOutOfCollectionBoundException;
-import com.example.kursovayarabota2.interfaces.ExaminerService;
+import com.example.kursovayarabota2.repositories.JavaQuestionRepository;
 import com.example.kursovayarabota2.services.ExaminerServiceImpl;
 import com.example.kursovayarabota2.services.JavaQuestionService;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,13 +21,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ExaminerServiceImplTest {
     private ExaminerServiceImpl examinerService;
+    private JavaQuestionRepository javaQuestionRepository;
     @Mock
-    private JavaQuestionService jcs;
+    private JavaQuestionService javaQuestionService;
 
     @BeforeEach
     public void setUp() {
-        jcs = new JavaQuestionService();
-        examinerService = new ExaminerServiceImpl(jcs);
+        javaQuestionRepository = new JavaQuestionRepository();
+        javaQuestionService = new JavaQuestionService(javaQuestionRepository);
+//        examinerService = new ExaminerServiceImpl(javaQuestionService);
 
     }
 
@@ -42,7 +44,7 @@ public class ExaminerServiceImplTest {
     }
 
     /**
-     * Проверка№1: совпадают ли возвращаемый методом вопросы, с вопросами из общего списка?
+     * @Проверка№1: совпадают ли возвращаемый методом вопросы, с вопросами из общего списка?
      *
      * @Результат работы тестируемого метода сохраняем в лист expectedQuestionList
      * @Конструкция из вложенных циклов (см.ниже) и условия внешним циклом пробегает
@@ -59,10 +61,11 @@ public class ExaminerServiceImplTest {
      * и листа. Если они совпадают значит повторяющихся вопросов не было.*/
     @Test
     public void getQuestionsTest() {
+        System.out.println(javaQuestionRepository.getAll().size());
         List<String> expectedQuestionList = examinerService.getQuestions(4);
 
         for (int i = 0; i < expectedQuestionList.size(); i++) {
-            for (Question element : jcs.getAll()) {
+            for (Question element : javaQuestionRepository.getAll()) {
                 if (expectedQuestionList.get(i).equals(element.getQuestion())) {
                     String expectedQuestion = element.getQuestion();
                     String actualQuestion = expectedQuestionList.get(i);
@@ -76,8 +79,11 @@ public class ExaminerServiceImplTest {
 
     @Test
     public void getQuestionsExceptionTest() {
-        assertThrows(AmountOutOfCollectionBoundException.class, () -> examinerService.getQuestions(jcs.getAll().size() + 1));
-        assertThrows(AmountOutOfCollectionBoundException.class, () -> examinerService.getQuestions(-1));
+        assertThrows(AmountOutOfCollectionBoundException.class,
+                () -> examinerService.getQuestions(javaQuestionRepository.getAll().size() + 1));
+
+        assertThrows(AmountOutOfCollectionBoundException.class,
+                () -> examinerService.getQuestions(-1));
     }
 
 }

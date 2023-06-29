@@ -2,12 +2,14 @@ package com.example.kursovayarabota2.services;
 
 import com.example.kursovayarabota2.exceptions.AmountOutOfCollectionBoundException;
 import com.example.kursovayarabota2.interfaces.ExaminerService;
+import com.example.kursovayarabota2.interfaces.QuestionRepository;
 import com.example.kursovayarabota2.interfaces.QuestionService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
@@ -15,10 +17,16 @@ public class ExaminerServiceImpl implements ExaminerService {
      * Коллекция questionList предназначена для хранения уникальных вопросов
      */
     private List<String> questionsList = new ArrayList<>();
-    private QuestionService questionService;
+    private QuestionService javaQuestionService;
+    private QuestionService mathQuestionService;
+    private QuestionRepository questionRepository;
 
-    public ExaminerServiceImpl(@Qualifier("JavaQuestionService")QuestionService questionService) {
-        this.questionService = questionService;
+    public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService javaQuestionService,
+                               @Qualifier("mathQuestionService") QuestionService mathQuestionService,
+                               @Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
+        this.javaQuestionService = javaQuestionService;
+        this.mathQuestionService = mathQuestionService;
+        this.questionRepository = questionRepository;
     }
 
     /**
@@ -36,18 +44,24 @@ public class ExaminerServiceImpl implements ExaminerService {
         validateQuantityQuestions(amount);
         int originalQuestionsCounter = 1;
         while (originalQuestionsCounter <= amount) {
-            String question = questionService.getRandomQuestion().getQuestion();
+            String question = null;
+            question = new Random().nextBoolean() ?
+                    javaQuestionService.getRandomQuestion().getQuestion() :
+                    mathQuestionService.getRandomQuestion().getQuestion();
             if (isQuestionUnique(question)) {
                 questionsList.add(question);
                 originalQuestionsCounter++;
+                System.out.println(questionsList.contains(question));
             }
         }
         return questionsList;
     }
 
+
     /**
      * Метод возвращает true, если вопрос уникален или false, если такой вопрос
      * уже присутствует в questionList.
+     *
      * @Цикл пробегает по коллекции "вопрос-ответ" и сравнивает вопрос параметр
      * с вопросом полученным из коллекции, если вопросы совпадают, то возвращается
      * false, если совпадений не найдено, то возвращается true
@@ -67,7 +81,7 @@ public class ExaminerServiceImpl implements ExaminerService {
      * то выбрасывается исключение
      */
     private void validateQuantityQuestions(int amount) {
-        if (amount > questionService.getAll().size() || amount < 0) {
+        if (amount > questionRepository.getAll().size() || amount < 0) {
             throw new AmountOutOfCollectionBoundException();
         }
     }
