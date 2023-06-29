@@ -3,6 +3,7 @@ package com.example.kursovayarabota2.services;
 import com.example.kursovayarabota2.exceptions.AmountOutOfCollectionBoundException;
 import com.example.kursovayarabota2.interfaces.ExaminerService;
 import com.example.kursovayarabota2.interfaces.QuestionService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class ExaminerServiceImpl implements ExaminerService {
     private List<String> questionsList = new ArrayList<>();
     private QuestionService questionService;
 
-    public ExaminerServiceImpl(QuestionService questionService) {
+    public ExaminerServiceImpl(@Qualifier("JavaQuestionService")QuestionService questionService) {
         this.questionService = questionService;
     }
 
@@ -66,7 +67,7 @@ public class ExaminerServiceImpl implements ExaminerService {
      * то выбрасывается исключение
      */
     private void validateQuantityQuestions(int amount) {
-        if (amount < questionService.getAll().size() || amount > 0) {
+        if (amount > questionService.getAll().size() || amount < 0) {
             throw new AmountOutOfCollectionBoundException();
         }
     }
