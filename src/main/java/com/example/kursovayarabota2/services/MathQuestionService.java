@@ -1,27 +1,26 @@
 package com.example.kursovayarabota2.services;
 
-import com.example.kursovayarabota2.exceptions.NullCollectionException;
 import com.example.kursovayarabota2.Question;
+import com.example.kursovayarabota2.exceptions.NullCollectionException;
 import com.example.kursovayarabota2.exceptions.ParameterIsNullException;
 import com.example.kursovayarabota2.interfaces.QuestionService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
-
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 @Service
-@Qualifier("JavaQuestionService")
-public class JavaQuestionService implements QuestionService {
-
+@Qualifier("MathQuestionService")
+public class MathQuestionService implements QuestionService {
     private Set<Question> questions = new HashSet<>(Set.of(
-            new Question("вопрос 1", "ответ 1"),
-            new Question("вопрос 2", "ответ 2"),
-            new Question("вопрос 3", "ответ 3"),
-            new Question("вопрос 4", "ответ 4"),
-            new Question("вопрос 5", "ответ 5"),
-            new Question("вопрос 6", "ответ 6")
+            new Question("матВопрос 1", "матОтвет 1"),
+            new Question("матВопрос 2", "матОтвет 2"),
+            new Question("матВопрос 3", "матОтвет 3"),
+            new Question("матВопрос 4", "матОтвет 4"),
+            new Question("матВопрос 5", "матОтвет 5"),
+            new Question("матВопрос 6", "матОтвет 6")
     ));
-
 
     @Override
     public void add(String question, String answer) {
