@@ -1,5 +1,6 @@
 package com.example.kursovayarabota2;
 
+import com.example.kursovayarabota2.exceptions.NullCollectionException;
 import com.example.kursovayarabota2.exceptions.ParameterIsNullException;
 import com.example.kursovayarabota2.services.JavaQuestionService;
 import org.junit.jupiter.api.BeforeEach;
@@ -99,4 +100,9 @@ public class JavaQuestionServiceTest {
         assertThrows(ParameterIsNullException.class, ()-> jqs.add("", ""));
     }
 
+    @Test
+    public void CollectionISNotNullExceptionTest(){
+        jqs.getAll().clear();
+        assertThrows(NullCollectionException.class, ()-> jqs.getRandomQuestion());
+    }
 }
