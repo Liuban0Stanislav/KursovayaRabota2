@@ -31,8 +31,7 @@ public class JavaQuestionServiceTest {
 
     @Test
     public void CollectionISNotNullExceptionTest(){
-        Set<Question> set = new HashSet<>();
-        Mockito.when(javaQuestionRepository.getAll()).thenReturn(set);
+        Mockito.when(javaQuestionRepository.getAll()).thenReturn(EMPTY_SET);
 
         assertThrows(NullCollectionException.class, ()-> jqs.getRandomQuestion());
     }
