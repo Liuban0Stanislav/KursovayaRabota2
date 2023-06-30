@@ -22,7 +22,7 @@ public class ExaminerServiceImpl implements ExaminerService {
     private QuestionRepository questionRepository;
 
     public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService javaQuestionService,
-                               @Qualifier("mathQuestionService") QuestionService mathQuestionService,
+                               @Qualifier("mathQuestionService") QuestionService mathQuestionService
                                /*@Qualifier("javaQuestionRepository") QuestionRepository questionRepository*/) {
         this.javaQuestionService = javaQuestionService;
         this.mathQuestionService = mathQuestionService;
