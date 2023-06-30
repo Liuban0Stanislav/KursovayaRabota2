@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static com.example.kursovayarabota2.TestingDataStorage.EMPTY_SET;
-import static com.example.kursovayarabota2.TestingDataStorage.FULL_SET;
+import static com.example.kursovayarabota2.TestingDataStorage.FULL_JAVA_SET;
 import static org.junit.jupiter.api.Assertions.*;
 
 

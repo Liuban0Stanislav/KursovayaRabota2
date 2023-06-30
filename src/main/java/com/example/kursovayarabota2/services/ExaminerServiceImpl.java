@@ -19,14 +19,17 @@ public class ExaminerServiceImpl implements ExaminerService {
     private List<String> questionsList = new ArrayList<>();
     private QuestionService javaQuestionService;
     private QuestionService mathQuestionService;
-    private QuestionRepository questionRepository;
+    private QuestionRepository javaQuestionRepository;
+    private QuestionRepository mathQuestionRepository;
 
     public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService javaQuestionService,
                                @Qualifier("mathQuestionService") QuestionService mathQuestionService,
-                               /*@Qualifier("javaQuestionRepository") QuestionRepository questionRepository*/) {
+                               @Qualifier("javaQuestionRepository") QuestionRepository javaQuestionRepository,
+                               @Qualifier("mathQuestionRepository") QuestionRepository mathQuestionRepository) {
         this.javaQuestionService = javaQuestionService;
         this.mathQuestionService = mathQuestionService;
-        /*this.questionRepository = questionRepository;*/
+        this.javaQuestionRepository = javaQuestionRepository;
+        this.mathQuestionRepository = mathQuestionRepository;
     }
 
     /**
@@ -81,7 +84,7 @@ public class ExaminerServiceImpl implements ExaminerService {
      * то выбрасывается исключение
      */
     private void validateQuantityQuestions(int amount) {
-        if (amount > questionRepository.getAll().size() || amount < 0) {
+        if (amount > javaQuestionRepository.getAll().size() || amount < 0) {
             throw new AmountOutOfCollectionBoundException();
         }
     }

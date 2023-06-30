@@ -16,20 +16,20 @@ import java.util.Set;
 @Qualifier("mathQuestionService")
 public class MathQuestionService implements QuestionService {
 
-    QuestionRepository questionRepository;
+    QuestionRepository mathQuestionRepository;
 
-    public MathQuestionService(@Qualifier("mathQuestionRepository") QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
+    public MathQuestionService(@Qualifier("mathQuestionRepository") QuestionRepository mathQuestionRepository) {
+        this.mathQuestionRepository = mathQuestionRepository;
     }
 
     @Override
     public Question getRandomQuestion() {
         validateCollectionIsNotNull();
-        int size = questionRepository.getAll().size();
+        int size = mathQuestionRepository.getAll().size();
         int item = new Random().nextInt(size);
         int i = 0;
         Question rez = null;
-        for (Question element : questionRepository.getAll()) {
+        for (Question element : mathQuestionRepository.getAll()) {
             if (i == item) {
                 rez = element;
             }
@@ -39,7 +39,7 @@ public class MathQuestionService implements QuestionService {
     }
 
     private void validateCollectionIsNotNull() {
-        if (questionRepository.getAll().isEmpty()) {
+        if (mathQuestionRepository.getAll().isEmpty()) {
             throw new NullCollectionException("коллекция пуста");
         }
     }

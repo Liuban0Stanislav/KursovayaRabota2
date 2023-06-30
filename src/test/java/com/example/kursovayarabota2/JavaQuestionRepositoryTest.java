@@ -13,7 +13,6 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import static com.example.kursovayarabota2.TestingDataStorage.*;
-import static com.example.kursovayarabota2.TestingDataStorage.QUESTION5;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class JavaQuestionRepositoryTest {
@@ -29,20 +28,20 @@ public class JavaQuestionRepositoryTest {
 
     public static Stream<Arguments> provideParamsForTheTests() {
         return Stream.of(
-                Arguments.of(QUESTION1),
-                Arguments.of(QUESTION2),
-                Arguments.of(QUESTION3),
-                Arguments.of(QUESTION4),
-                Arguments.of(QUESTION5)
+                Arguments.of(QUESTION1_JAVA),
+                Arguments.of(QUESTION2_JAVA),
+                Arguments.of(QUESTION3_JAVA),
+                Arguments.of(QUESTION4_JAVA),
+                Arguments.of(QUESTION5_JAVA)
         );
     }
 
     private void fullCollectionWithTestQuestions() {
-        javaQuestionRepository.getAll().add(QUESTION1);
-        javaQuestionRepository.getAll().add(QUESTION2);
-        javaQuestionRepository.getAll().add(QUESTION3);
-        javaQuestionRepository.getAll().add(QUESTION4);
-        javaQuestionRepository.getAll().add(QUESTION5);
+        javaQuestionRepository.getAll().add(QUESTION1_JAVA);
+        javaQuestionRepository.getAll().add(QUESTION2_JAVA);
+        javaQuestionRepository.getAll().add(QUESTION3_JAVA);
+        javaQuestionRepository.getAll().add(QUESTION4_JAVA);
+        javaQuestionRepository.getAll().add(QUESTION5_JAVA);
     }
 
     @ParameterizedTest
@@ -57,23 +56,23 @@ public class JavaQuestionRepositoryTest {
     public void addTest() {
         fullCollectionWithTestQuestions();//добавляю тестовые вопросы и ответы
 
-        assertTrue(javaQuestionRepository.getAll().contains(QUESTION1)); //проверяю что тестовые вопросы добавились в коллекцию
-        assertTrue(javaQuestionRepository.getAll().contains(QUESTION2)); //проверяю что тестовые вопросы добавились в коллекцию
-        assertTrue(javaQuestionRepository.getAll().contains(QUESTION3)); //проверяю что тестовые вопросы добавились в коллекцию
-        assertTrue(javaQuestionRepository.getAll().contains(QUESTION4)); //проверяю что тестовые вопросы добавились в коллекцию
-        assertTrue(javaQuestionRepository.getAll().contains(QUESTION5)); //проверяю что тестовые вопросы добавились в коллекцию
+        assertTrue(javaQuestionRepository.getAll().contains(QUESTION1_JAVA)); //проверяю что тестовые вопросы добавились в коллекцию
+        assertTrue(javaQuestionRepository.getAll().contains(QUESTION2_JAVA)); //проверяю что тестовые вопросы добавились в коллекцию
+        assertTrue(javaQuestionRepository.getAll().contains(QUESTION3_JAVA)); //проверяю что тестовые вопросы добавились в коллекцию
+        assertTrue(javaQuestionRepository.getAll().contains(QUESTION4_JAVA)); //проверяю что тестовые вопросы добавились в коллекцию
+        assertTrue(javaQuestionRepository.getAll().contains(QUESTION5_JAVA)); //проверяю что тестовые вопросы добавились в коллекцию
     }
 
     @Test
     public void removeTest() {
-        String question1 = QUESTION1.getQuestion();
-        String answer1 = QUESTION1.getAnswer();
+        String question1 = QUESTION1_JAVA.getQuestion();
+        String answer1 = QUESTION1_JAVA.getAnswer();
 
         javaQuestionRepository.add(question1, answer1);//добавляю тестовые вопросы и ответы
-        assertTrue(javaQuestionRepository.getAll().contains(QUESTION1)); //проверяю что тестовый вопрос добавился в коллекцию
+        assertTrue(javaQuestionRepository.getAll().contains(QUESTION1_JAVA)); //проверяю что тестовый вопрос добавился в коллекцию
 
-        javaQuestionRepository.remove(QUESTION1.getQuestion(), QUESTION1.getAnswer());//удаляю вопрос из коллекции
-        assertFalse(javaQuestionRepository.getAll().contains(QUESTION1)); //проверяю что тестовый вопрос удалился из коллекции
+        javaQuestionRepository.remove(QUESTION1_JAVA.getQuestion(), QUESTION1_JAVA.getAnswer());//удаляю вопрос из коллекции
+        assertFalse(javaQuestionRepository.getAll().contains(QUESTION1_JAVA)); //проверяю что тестовый вопрос удалился из коллекции
     }
 
     @Test
@@ -81,11 +80,11 @@ public class JavaQuestionRepositoryTest {
         fullCollectionWithTestQuestions();//добавляю тестовые вопросы и ответы
 
         Set<Question> expectedSet = new HashSet<>(); //заполняю "ожидаемую" коллекцию
-        expectedSet.add(new Question(QUESTION1.getQuestion(), QUESTION1.getAnswer()));
-        expectedSet.add(new Question(QUESTION2.getQuestion(), QUESTION2.getAnswer()));
-        expectedSet.add(new Question(QUESTION3.getQuestion(), QUESTION3.getAnswer()));
-        expectedSet.add(new Question(QUESTION4.getQuestion(), QUESTION4.getAnswer()));
-        expectedSet.add(new Question(QUESTION5.getQuestion(), QUESTION5.getAnswer()));
+        expectedSet.add(new Question(QUESTION1_JAVA.getQuestion(), QUESTION1_JAVA.getAnswer()));
+        expectedSet.add(new Question(QUESTION2_JAVA.getQuestion(), QUESTION2_JAVA.getAnswer()));
+        expectedSet.add(new Question(QUESTION3_JAVA.getQuestion(), QUESTION3_JAVA.getAnswer()));
+        expectedSet.add(new Question(QUESTION4_JAVA.getQuestion(), QUESTION4_JAVA.getAnswer()));
+        expectedSet.add(new Question(QUESTION5_JAVA.getQuestion(), QUESTION5_JAVA.getAnswer()));
 
         assertNotNull(javaQuestionRepository.getAll()); //проверка, что коллекция не пуста
         assertEquals(expectedSet, javaQuestionRepository.getAll()); //проверка, что ожидаемая и актуальные коллекции совпадают
