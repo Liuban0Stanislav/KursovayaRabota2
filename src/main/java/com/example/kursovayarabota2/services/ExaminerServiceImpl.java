@@ -23,10 +23,10 @@ public class ExaminerServiceImpl implements ExaminerService {
 
     public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService javaQuestionService,
                                @Qualifier("mathQuestionService") QuestionService mathQuestionService,
-                               @Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
+                               /*@Qualifier("javaQuestionRepository") QuestionRepository questionRepository*/) {
         this.javaQuestionService = javaQuestionService;
         this.mathQuestionService = mathQuestionService;
-        this.questionRepository = questionRepository;
+        /*this.questionRepository = questionRepository;*/
     }
 
     /**

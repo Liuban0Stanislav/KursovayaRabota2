@@ -21,7 +21,7 @@ public class JavaQuestionRepositoryTest {
     private JavaQuestionRepository javaQuestionRepository;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         javaQuestionRepository = new JavaQuestionRepository();
         javaQuestionRepository.getAll().clear(); //очищаю коллекцию
         assertTrue(javaQuestionRepository.getAll().isEmpty()); //проверка, что коллекция пуста
@@ -92,12 +92,27 @@ public class JavaQuestionRepositoryTest {
     }
 
     @Test
-    public void addValidateParameterTest(){
-        assertThrows(ParameterIsNullException.class, ()-> javaQuestionRepository.add("", ""));
+    public void addValidateParameterTest() {
+        assertThrows(ParameterIsNullException.class, () -> javaQuestionRepository.add("", ""));
     }
 
     @Test
-    public void getRandomQuestionTest(){
-        assertThrows(ParameterIsNullException.class, ()-> javaQuestionRepository.add("", ""));
+    public void getRandomQuestionTest() {
+        assertThrows(ParameterIsNullException.class, () -> javaQuestionRepository.add("", ""));
     }
+
+    @Test
+    public void initTest() {
+        javaQuestionRepository.init();
+        Set<Question> questionsExpected = new HashSet<>(Set.of(
+                new Question("javaВопрос 1", "javaОтвет 1"),
+                new Question("javaВопрос 2", "javaОтвет 2"),
+                new Question("javaВопрос 3", "javaОтвет 3"),
+                new Question("javaВопрос 4", "javaОтвет 4"),
+                new Question("javaВопрос 5", "javaОтвет 5"),
+                new Question("javaВопрос 6", "javaОтвет 6")
+        ));
+        assertTrue(javaQuestionRepository.getAll().containsAll(questionsExpected));
+    }
+
 }

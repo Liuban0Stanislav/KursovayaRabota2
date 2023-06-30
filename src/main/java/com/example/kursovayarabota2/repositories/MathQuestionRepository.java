@@ -1,6 +1,7 @@
 package com.example.kursovayarabota2.repositories;
 
         import com.example.kursovayarabota2.Question;
+        import com.example.kursovayarabota2.exceptions.ParameterIsNullException;
         import com.example.kursovayarabota2.interfaces.QuestionRepository;
         import org.springframework.beans.factory.annotation.Qualifier;
         import org.springframework.stereotype.Repository;
@@ -26,16 +27,36 @@ public class MathQuestionRepository implements QuestionRepository {
 
     @Override
     public void add(String question, String answer) {
+        validateParameter(question);
+        validateParameter(answer);
         questions.add(new Question(question, answer));
+        System.out.println("объект Question добавлен\n" +
+                question + "\n" +
+                answer + "\n");
     }
 
     @Override
     public void remove(String question, String answer) {
-        questions.remove(new Question(question, answer));
+        validateParameter(question);
+        validateParameter(answer);
+        Question questionNeedRemove = new Question(question, answer);
+        questions.remove(questionNeedRemove);
+        System.out.println("объект Question удален\n" +
+                question + "\n" +
+                answer + "\n");
     }
 
     @Override
     public Set<Question> getAll() {
+        for (Question question : questions) {
+        }
         return questions;
+    }
+
+
+    private void validateParameter(String parameter) {
+        if (parameter.equals("")) {
+            throw new ParameterIsNullException("пользователь забыл ввести вопрос либо ответ");
+        }
     }
 }

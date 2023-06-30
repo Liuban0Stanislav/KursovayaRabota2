@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +28,7 @@ public class JavaQuestionServiceTest {
     public void setUp() {
         javaQuestionRepository = new JavaQuestionRepository();
         jqs = new JavaQuestionService(javaQuestionRepository);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test

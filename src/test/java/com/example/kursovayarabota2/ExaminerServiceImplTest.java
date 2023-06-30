@@ -1,13 +1,20 @@
 package com.example.kursovayarabota2;
 
 import com.example.kursovayarabota2.exceptions.AmountOutOfCollectionBoundException;
+import com.example.kursovayarabota2.interfaces.QuestionRepository;
+import com.example.kursovayarabota2.interfaces.QuestionService;
 import com.example.kursovayarabota2.repositories.JavaQuestionRepository;
+import com.example.kursovayarabota2.repositories.MathQuestionRepository;
 import com.example.kursovayarabota2.services.ExaminerServiceImpl;
 import com.example.kursovayarabota2.services.JavaQuestionService;
+import com.example.kursovayarabota2.services.MathQuestionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.provider.Arguments;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 
 import java.util.HashSet;
@@ -21,26 +28,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ExaminerServiceImplTest {
     private ExaminerServiceImpl examinerService;
-    private JavaQuestionRepository javaQuestionRepository;
     @Mock
     private JavaQuestionService javaQuestionService;
+    @Mock
+    private MathQuestionService mathQuestionService;
+    @Mock
+    private JavaQuestionRepository javaQuestionRepository;
+    @Mock
+    private MathQuestionRepository mathQuestionRepository;
 
     @BeforeEach
     public void setUp() {
         javaQuestionRepository = new JavaQuestionRepository();
+        mathQuestionRepository = new MathQuestionRepository();
+
         javaQuestionService = new JavaQuestionService(javaQuestionRepository);
-//        examinerService = new ExaminerServiceImpl(javaQuestionService);
+        mathQuestionService = new MathQuestionService(mathQuestionRepository);
 
-    }
-
-    public static Stream<Arguments> provideParamsForTheTests() {
-        return Stream.of(
-                Arguments.of(QUESTION1),
-                Arguments.of(QUESTION2),
-                Arguments.of(QUESTION3),
-                Arguments.of(QUESTION4),
-                Arguments.of(QUESTION5)
-        );
+        examinerService = new ExaminerServiceImpl(javaQuestionService, mathQuestionService);
+        MockitoAnnotations.openMocks(this);
     }
 
     /**
@@ -61,6 +67,8 @@ public class ExaminerServiceImplTest {
      * и листа. Если они совпадают значит повторяющихся вопросов не было.*/
     @Test
     public void getQuestionsTest() {
+        Mockito.when(javaQuestionRepository.getAll().size()).thenReturn(4);
+
         System.out.println(javaQuestionRepository.getAll().size());
         List<String> expectedQuestionList = examinerService.getQuestions(4);
 
