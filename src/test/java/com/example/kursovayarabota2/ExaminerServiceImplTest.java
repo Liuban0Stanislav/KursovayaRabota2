@@ -42,6 +42,9 @@ public class ExaminerServiceImplTest {
 
     @Test
     public void getQuestionsTest() {
+        Mockito.when(javaQuestionRepository.getAll()).thenReturn(FULL_JAVA_SET);
+        Mockito.when(mathQuestionRepository.getAll()).thenReturn(FULL_MATH_SET);
+
         Mockito.when(javaQuestionService.getRandomQuestion())
                 .thenReturn(QUESTION1_JAVA)
                 .thenReturn(QUESTION2_JAVA)
