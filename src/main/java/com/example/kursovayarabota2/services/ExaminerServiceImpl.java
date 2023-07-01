@@ -84,7 +84,7 @@ public class ExaminerServiceImpl implements ExaminerService {
      * то выбрасывается исключение
      */
     private void validateQuantityQuestions(int amount) {
-        if (amount > javaQuestionRepository.getAll().size() || amount < 0) {
+        if (amount > javaQuestionService.getAll().size() || amount < 0) {
             throw new AmountOutOfCollectionBoundException();
         }
     }
