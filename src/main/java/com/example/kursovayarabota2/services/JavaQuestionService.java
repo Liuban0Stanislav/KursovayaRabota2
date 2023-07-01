@@ -21,6 +21,22 @@ public class JavaQuestionService implements QuestionService {
         this.javaQuestionRepository = javaQuestionRepository;
     }
 
+
+    @Override
+    public Question add(String question, String answer) {
+        return javaQuestionRepository.add(question, answer);
+    }
+
+    @Override
+    public Question remove(String question, String answer) {
+        return javaQuestionRepository.remove(question, answer);
+    }
+
+    @Override
+    public Set<Question> getAll() {
+        return javaQuestionRepository.getAll();
+    }
+
     @Override
     public Question getRandomQuestion() {
         validateCollectionIsNotNull();

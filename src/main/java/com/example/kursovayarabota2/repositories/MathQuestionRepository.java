@@ -26,17 +26,19 @@ public class MathQuestionRepository implements QuestionRepository {
     }
 
     @Override
-    public void add(String question, String answer) {
+    public Question add(String question, String answer) {
         validateParameter(question);
         validateParameter(answer);
-        questions.add(new Question(question, answer));
+        Question questionAdd = new Question(question, answer);
+        questions.add(questionAdd);
         System.out.println("объект Question добавлен\n" +
                 question + "\n" +
                 answer + "\n");
+        return questionAdd;
     }
 
     @Override
-    public void remove(String question, String answer) {
+    public Question remove(String question, String answer) {
         validateParameter(question);
         validateParameter(answer);
         Question questionNeedRemove = new Question(question, answer);
@@ -44,6 +46,7 @@ public class MathQuestionRepository implements QuestionRepository {
         System.out.println("объект Question удален\n" +
                 question + "\n" +
                 answer + "\n");
+        return questionNeedRemove;
     }
 
     @Override
@@ -53,9 +56,8 @@ public class MathQuestionRepository implements QuestionRepository {
         return questions;
     }
 
-
     private void validateParameter(String parameter) {
-        if (parameter.equals("")) {
+        if (parameter.equals("") || parameter.equals(" ")) {
             throw new ParameterIsNullException("пользователь забыл ввести вопрос либо ответ");
         }
     }

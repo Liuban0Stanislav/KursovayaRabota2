@@ -11,14 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/exam/java")
 public class JavaQuestionController {
     private QuestionService questionService;
-    private ExaminerService examinerService;
     private QuestionRepository questionRepository;
 
     public JavaQuestionController(@Qualifier("javaQuestionService") QuestionService questionService,
-                                  ExaminerService examinerService,
                                   @Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
         this.questionService = questionService;
-        this.examinerService = examinerService;
         this.questionRepository = questionRepository;
     }
 
@@ -41,12 +38,6 @@ public class JavaQuestionController {
         return "объект Question удален\n" +
                 question + "\n" +
                 answer + "\n";
-    }
-
-    @GetMapping("/get/question/{amount}")
-    public String getQuestion(@PathVariable("amount") int amount) {
-        return "<h1>Случайный вопрос: \n</h1>" +
-                examinerService.getQuestions(amount);
     }
 }
 

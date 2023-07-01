@@ -19,10 +19,5 @@ public class ExamController {
     public String getQuestions(@PathVariable("amount") int amount){
         return "<h1>" + examinerService.getQuestions(amount) + "</h1>";
     }
-
-    @GetMapping("/")
-    public String lol(){
-        return "hello";
-    }
 }
 
