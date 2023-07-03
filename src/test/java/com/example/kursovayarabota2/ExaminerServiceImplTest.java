@@ -1,27 +1,19 @@
 package com.example.kursovayarabota2;
 
-import com.example.kursovayarabota2.exceptions.AmountOutOfCollectionBoundException;
-import com.example.kursovayarabota2.interfaces.QuestionRepository;
-import com.example.kursovayarabota2.interfaces.QuestionService;
-import com.example.kursovayarabota2.repositories.JavaQuestionRepository;
-import com.example.kursovayarabota2.repositories.MathQuestionRepository;
 import com.example.kursovayarabota2.services.ExaminerServiceImpl;
 import com.example.kursovayarabota2.services.JavaQuestionService;
 import com.example.kursovayarabota2.services.MathQuestionService;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.*;
-
 import static com.example.kursovayarabota2.TestingDataStorage.*;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 @ExtendWith(MockitoExtension.class)
 public class ExaminerServiceImplTest {
