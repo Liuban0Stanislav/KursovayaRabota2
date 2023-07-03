@@ -46,4 +46,6 @@ public class TestingDataStorage {
     ));
 
     public static final List<Question> FULL_TOTAL_LIST = new ArrayList<>(FULL_TOTAL_SET);
+
 }
+
