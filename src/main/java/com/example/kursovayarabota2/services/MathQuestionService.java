@@ -14,12 +14,11 @@ import java.util.Set;
 @Qualifier("mathQuestionService")
 public class MathQuestionService implements QuestionService {
 
-    QuestionRepository mathQuestionRepository;
+    private QuestionRepository mathQuestionRepository;
 
     public MathQuestionService(@Qualifier("mathQuestionRepository") QuestionRepository mathQuestionRepository) {
         this.mathQuestionRepository = mathQuestionRepository;
     }
-
 
     @Override
     public Question add(String question, String answer) {

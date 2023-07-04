@@ -21,7 +21,6 @@ public class JavaQuestionService implements QuestionService {
         this.javaQuestionRepository = javaQuestionRepository;
     }
 
-
     @Override
     public Question add(String question, String answer) {
         return javaQuestionRepository.add(question, answer);

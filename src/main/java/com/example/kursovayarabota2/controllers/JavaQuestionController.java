@@ -11,22 +11,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/exam/java")
 public class JavaQuestionController {
     private QuestionService questionService;
-    private QuestionRepository questionRepository;
 
-    public JavaQuestionController(@Qualifier("javaQuestionService") QuestionService questionService,
-                                  @Qualifier("javaQuestionRepository") QuestionRepository questionRepository) {
+    public JavaQuestionController(@Qualifier("javaQuestionService") QuestionService questionService) {
         this.questionService = questionService;
-        this.questionRepository = questionRepository;
     }
 
     @GetMapping("/")
     public String getAll() {
-        return questionRepository.getAll().toString();
+        return questionService.getAll().toString();
     }
 
     @GetMapping("/add")
     public String add(@RequestParam("question") String question, @RequestParam("answer") String answer) {
-        questionRepository.add(question, answer);
+        questionService.add(question, answer);
         return "объект Question добавлен\n" +
                 question + "\n" +
                 answer + "\n";
@@ -34,7 +31,7 @@ public class JavaQuestionController {
 
     @GetMapping("/remove")
     public String remove(@RequestParam("question") String question, @RequestParam("answer") String answer) {
-        questionRepository.remove(question, answer);
+        questionService.remove(question, answer);
         return "объект Question удален\n" +
                 question + "\n" +
                 answer + "\n";
