@@ -5,21 +5,21 @@ import com.example.kursovayarabota2.exceptions.NullCollectionException;
 import com.example.kursovayarabota2.interfaces.QuestionRepository;
 import com.example.kursovayarabota2.interfaces.QuestionService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
 import java.util.Set;
 
 @Service
+@Component
 @Qualifier("mathQuestionService")
 public class MathQuestionService implements QuestionService {
-
     private QuestionRepository mathQuestionRepository;
 
     public MathQuestionService(@Qualifier("mathQuestionRepository") QuestionRepository mathQuestionRepository) {
         this.mathQuestionRepository = mathQuestionRepository;
     }
-
     @Override
     public Question add(String question, String answer) {
         return mathQuestionRepository.add(question, answer);

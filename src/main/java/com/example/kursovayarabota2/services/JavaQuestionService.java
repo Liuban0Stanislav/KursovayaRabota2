@@ -6,17 +6,19 @@ import com.example.kursovayarabota2.exceptions.ParameterIsNullException;
 import com.example.kursovayarabota2.interfaces.QuestionRepository;
 import com.example.kursovayarabota2.interfaces.QuestionService;
 import com.example.kursovayarabota2.repositories.JavaQuestionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@Component
 @Qualifier("javaQuestionService")
 public class JavaQuestionService implements QuestionService {
-
    private QuestionRepository javaQuestionRepository;
-
+   @Autowired
     public JavaQuestionService(@Qualifier("javaQuestionRepository") QuestionRepository javaQuestionRepository) {
         this.javaQuestionRepository = javaQuestionRepository;
     }

@@ -1,5 +1,6 @@
 package com.example.kursovayarabota2;
 
+import com.example.kursovayarabota2.exceptions.NullCollectionException;
 import com.example.kursovayarabota2.exceptions.ParameterIsNullException;
 import com.example.kursovayarabota2.interfaces.QuestionRepository;
 import com.example.kursovayarabota2.interfaces.QuestionService;
@@ -8,7 +9,9 @@ import com.example.kursovayarabota2.services.MathQuestionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.Set;
 
@@ -21,8 +24,6 @@ public class MathQuestionServiceTest {
     @Mock
     private QuestionRepository mathQuestionRepository;
     private QuestionService mathQuestionService;
-
-
 
 
     @BeforeEach
@@ -65,5 +66,16 @@ public class MathQuestionServiceTest {
         Set<Question> expectedSet = mathQuestionService.getAll();
 
         assertTrue(expectedSet.containsAll(mathQuestionService.getAll()));
+    }
+    @Test
+    public void getRandomQuestionTest(){
+        Mockito.when(mathQuestionRepository.getAll()).thenReturn(FULL_MATH_SET);
+        assertTrue(FULL_MATH_SET.contains(mathQuestionService.getRandomQuestion()));
+    }
+
+    @Test
+    public void getRandomQuestionExceptionTest(){
+        Mockito.when(mathQuestionRepository.getAll()).thenReturn(EMPTY_SET);
+        assertThrows(NullCollectionException.class, () -> mathQuestionService.getRandomQuestion());
     }
 }
