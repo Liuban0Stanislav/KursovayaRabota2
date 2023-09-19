@@ -1,7 +1,6 @@
 package com.example.kursovayarabota2.interfaces;
 
-import com.example.kursovayarabota2.Question;
-import org.springframework.stereotype.Service;
+import com.example.kursovayarabota2.model.Question;
 
 import java.util.Set;
 

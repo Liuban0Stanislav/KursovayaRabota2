@@ -54,6 +54,7 @@ public class ExaminerServiceImplTest {
         assertEquals(requestedQuestionsCount, examinerService.getQuestions(requestedQuestionsCount).size());
     }
 
+
     @Test
     public void getQuestionsExceptionTest() {
         assertThrows(AmountOutOfCollectionBoundException.class,

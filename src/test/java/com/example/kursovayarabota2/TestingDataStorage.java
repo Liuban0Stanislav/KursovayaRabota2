@@ -1,5 +1,7 @@
 package com.example.kursovayarabota2;
 
+import com.example.kursovayarabota2.model.Question;
+
 import java.util.*;
 
 public class TestingDataStorage {

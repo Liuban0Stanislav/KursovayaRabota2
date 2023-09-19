@@ -1,20 +1,15 @@
 package com.example.kursovayarabota2;
 
 import com.example.kursovayarabota2.exceptions.NullCollectionException;
-import com.example.kursovayarabota2.exceptions.ParameterIsNullException;
-import com.example.kursovayarabota2.interfaces.QuestionRepository;
-import com.example.kursovayarabota2.interfaces.QuestionService;
+import com.example.kursovayarabota2.model.Question;
 import com.example.kursovayarabota2.repositories.MathQuestionRepository;
 import com.example.kursovayarabota2.services.MathQuestionService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.Set;
 
@@ -29,14 +24,6 @@ public class MathQuestionServiceTest {
     private MathQuestionRepository mathQuestionRepository;
     @InjectMocks
     private MathQuestionService mathQuestionService;
-
-
-//    @BeforeEach
-//    public void setUp() {
-//        mathQuestionRepository = new MathQuestionRepository();
-//        mathQuestionService = new MathQuestionService(mathQuestionRepository);
-//        MockitoAnnotations.openMocks(this);
-//    }
 
     @Test
     public void addTest (){
@@ -54,12 +41,6 @@ public class MathQuestionServiceTest {
 
         assertEquals(expected, actual);
     }
-
-//    @Test
-//    public void removeNegativeTest() {
-//        assertThrows(ParameterIsNullException.class, () -> mathQuestionService.remove("", ""));
-//        assertThrows(ParameterIsNullException.class, () -> mathQuestionService.remove(" ", " "));
-//    }
 
     @Test
     public void getAllTest(){

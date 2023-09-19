@@ -1,6 +1,5 @@
-package com.example.kursovayarabota2;
+package com.example.kursovayarabota2.model;
 
-import java.util.Collections;
 import java.util.Objects;
 
 public class Question {

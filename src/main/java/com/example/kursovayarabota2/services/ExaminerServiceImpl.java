@@ -1,9 +1,7 @@
 package com.example.kursovayarabota2.services;
 
-import com.example.kursovayarabota2.Question;
 import com.example.kursovayarabota2.exceptions.AmountOutOfCollectionBoundException;
 import com.example.kursovayarabota2.interfaces.ExaminerService;
-import com.example.kursovayarabota2.interfaces.QuestionRepository;
 import com.example.kursovayarabota2.interfaces.QuestionService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -40,21 +38,14 @@ public class ExaminerServiceImpl implements ExaminerService {
         validateQuantityQuestions(amount);
         int originalQuestionsCounter = 1;
         while (originalQuestionsCounter <= amount) {
-
             String question = new Random().nextBoolean() ?
                     javaQuestionService.getRandomQuestion().getQuestion() :
                     mathQuestionService.getRandomQuestion().getQuestion();
             if (isQuestionUnique(question)) {
                 questionsList.add(question);
                 originalQuestionsCounter++;
-                ////////////////////////////////////////
-                System.out.print("question = " + question + " - ");
-                System.out.println(questionsList.contains(question));
             }
         }
-        ////////////////////////////////////////
-        System.out.println("javaQuestionService.getAll() = " + javaQuestionService.getAll());
-        System.out.println("mathQuestionService.getAll() = " + mathQuestionService.getAll());
         return questionsList;
     }
 

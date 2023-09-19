@@ -1,7 +1,7 @@
 package com.example.kursovayarabota2;
 
 import com.example.kursovayarabota2.exceptions.NullCollectionException;
-import com.example.kursovayarabota2.interfaces.QuestionRepository;
+import com.example.kursovayarabota2.model.Question;
 import com.example.kursovayarabota2.repositories.JavaQuestionRepository;
 import com.example.kursovayarabota2.services.JavaQuestionService;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.Set;
 
@@ -25,14 +24,6 @@ public class JavaQuestionServiceTest {
     private JavaQuestionRepository javaQuestionRepository;
     @InjectMocks
     private JavaQuestionService javaQuestionService;
-
-
-//    @BeforeEach
-//    public void setUp() {
-//        javaQuestionRepository = new JavaQuestionRepository();
-//        javaQuestionService = new JavaQuestionService(javaQuestionRepository);
-//        MockitoAnnotations.openMocks(this);
-//    }
 
     @Test
     public void addTest (){
@@ -50,12 +41,6 @@ public class JavaQuestionServiceTest {
 
         assertEquals(expected, actual);
     }
-
-//    @Test
-//    public void removeNegativeTest() {
-//        assertThrows(ParameterIsNullException.class, () -> javaQuestionService.remove("", ""));
-//        assertThrows(ParameterIsNullException.class, () -> javaQuestionService.remove(" ", " "));
-//    }
 
     @Test
     public void getAllTest(){

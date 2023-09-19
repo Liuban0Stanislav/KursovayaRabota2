@@ -1,9 +1,6 @@
 package com.example.kursovayarabota2.controllers;
 
-import com.example.kursovayarabota2.interfaces.ExaminerService;
-import com.example.kursovayarabota2.interfaces.QuestionRepository;
 import com.example.kursovayarabota2.interfaces.QuestionService;
-import com.example.kursovayarabota2.repositories.JavaQuestionRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +18,7 @@ public class JavaQuestionController {
         return questionService.getAll().toString();
     }
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     public String add(@RequestParam("question") String question, @RequestParam("answer") String answer) {
         questionService.add(question, answer);
         return "объект Question добавлен\n" +

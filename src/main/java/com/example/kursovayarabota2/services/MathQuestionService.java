@@ -1,6 +1,6 @@
 package com.example.kursovayarabota2.services;
 
-import com.example.kursovayarabota2.Question;
+import com.example.kursovayarabota2.model.Question;
 import com.example.kursovayarabota2.exceptions.NullCollectionException;
 import com.example.kursovayarabota2.interfaces.QuestionRepository;
 import com.example.kursovayarabota2.interfaces.QuestionService;
@@ -45,6 +45,7 @@ public class MathQuestionService implements QuestionService {
         for (Question element : mathQuestionRepository.getAll()) {
             if (i == item) {
                 rez = element;
+                break;
             }
             i++;
         }

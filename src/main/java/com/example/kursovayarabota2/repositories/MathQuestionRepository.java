@@ -1,6 +1,6 @@
 package com.example.kursovayarabota2.repositories;
 
-        import com.example.kursovayarabota2.Question;
+        import com.example.kursovayarabota2.model.Question;
         import com.example.kursovayarabota2.exceptions.ParameterIsNullException;
         import com.example.kursovayarabota2.interfaces.QuestionRepository;
         import org.springframework.beans.factory.annotation.Qualifier;

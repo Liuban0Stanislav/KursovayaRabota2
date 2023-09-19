@@ -1,11 +1,9 @@
 package com.example.kursovayarabota2.services;
 
 import com.example.kursovayarabota2.exceptions.NullCollectionException;
-import com.example.kursovayarabota2.Question;
-import com.example.kursovayarabota2.exceptions.ParameterIsNullException;
+import com.example.kursovayarabota2.model.Question;
 import com.example.kursovayarabota2.interfaces.QuestionRepository;
 import com.example.kursovayarabota2.interfaces.QuestionService;
-import com.example.kursovayarabota2.repositories.JavaQuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -48,6 +46,7 @@ public class JavaQuestionService implements QuestionService {
         for (Question element : javaQuestionRepository.getAll()) {
             if (i == item) {
                 rez = element;
+                break;
             }
             i++;
         }
